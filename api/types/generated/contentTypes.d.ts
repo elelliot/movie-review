@@ -693,13 +693,12 @@ export interface ApiFilmFilm extends Schema.CollectionType {
     released: Attribute.Date;
     director: Attribute.String;
     plot: Attribute.Text;
-    slugBad: Attribute.String;
+    slug: Attribute.UID<'api::film.film', 'title'> & Attribute.Required;
     reviews: Attribute.Relation<
       'api::film.film',
       'oneToMany',
       'api::review.review'
     >;
-    slug: Attribute.UID<'api::film.film', 'title'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -1,13 +1,13 @@
-import { fetcher } from "@/lib/api";
-import { setToken, unsetToken } from "@/lib/auth";
-import { useUser } from "@/lib/authContext";
-import Link from "next/link";
-import { useState } from "react";
+import Link from 'next/link';
+import { useState } from 'react';
+import { fetcher } from '../lib/api';
+import { setToken, unsetToken } from '../lib/auth';
+import { useUser } from '../lib/authContext';
 
 const Nav = () => {
   const [data, setData] = useState({
-    identifier: "",
-    password: "",
+    identifier: '',
+    password: '',
   });
 
   const { user, loading } = useUser();
@@ -18,9 +18,9 @@ const Nav = () => {
     const responseData = await fetcher(
       `${process.env.NEXT_PUBLIC_STRAPI_API}/auth/local`,
       {
-        method: "POST",
-        header: {
-          "Content-type": "application/json",
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           identifier: data.identifier,
@@ -30,9 +30,11 @@ const Nav = () => {
     );
     setToken(responseData);
   };
+
   const logout = () => {
     unsetToken();
   };
+
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -98,35 +100,36 @@ const Nav = () => {
             </Link>
           </li>
           <li>
-            <Link
-              href="/films"
-              className="md:p-2 py-2 block hover:text-purple-400"
-            >
-              Films
+            <Link href="/films" className="md:p-2 py-2 block hover:text-purple-400">
+              
+                Films
             </Link>
           </li>
           {!loading &&
             (user ? (
-              <div>
-                <li>
-                  <Link
-                    href="/profile"
-                    className="md:p-2 py-2 block hover:text-purple-400"
-                  >
+              <li>
+                <Link href="/profile" className="md:p-2 py-2 block hover:text-purple-400">
+                  
                     Profile
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    className="md:p-2 py-2 block hover:text-purple-400 hover:cursor-pointer"
-                    onClick={logout}
-                  >
-                    Logout
-                  </a>
-                </li>
-              </div>
+                  
+                </Link>
+              </li>
             ) : (
-              ""
+              ''
+            ))}
+          {!loading &&
+            (user ? (
+              <li>
+                <a
+                  className="md:p-2 py-2 block hover:text-purple-400"
+                  onClick={logout}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Logout
+                </a>
+              </li>
+            ) : (
+              ''
             ))}
           {!loading && !user ? (
             <>
@@ -158,16 +161,15 @@ const Nav = () => {
                 </form>
               </li>
               <li>
-                <Link
-                  href="/register"
-                  className="md:p-2 block py-2 hover:text-purple-400 text-black"
-                >
-                  Register
+                <Link href="/register" className="md:p-2 block py-2 hover:text-purple-400 text-black">
+                  
+                    Register
+                  
                 </Link>
               </li>
             </>
           ) : (
-            ""
+            ''
           )}
         </ul>
       </div>

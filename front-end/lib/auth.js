@@ -13,6 +13,7 @@ export const setToken = (data) => {
 
   if (Cookies.get("username")) {
     Router.reload("/");
+    console.log('YA PAPI')
   }
 };
 
@@ -31,7 +32,7 @@ export const unsetToken = () => {
 export const getUserFromLocalCookie = () => {
   const jwt = getTokenFromLocalCookie();
   if (jwt) {
-    return fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/users/me`, {
+    return fetcher(`${process.env.NEXT_PUBLIC_STRAPI_API}/users/me`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
@@ -49,7 +50,7 @@ export const getUserFromLocalCookie = () => {
 export const getIdFromLocalCookie = () => {
   const jwt = getTokenFromLocalCookie();
   if (jwt) {
-    return fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/users/me`, {
+    return fetcher(`${process.env.NEXT_PUBLIC_STRAPI_API}/users/me`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
